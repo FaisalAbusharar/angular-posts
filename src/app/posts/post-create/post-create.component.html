@@ -20,7 +20,9 @@
         required
         placeholder="Post Content"
         minlength="3"
-        ></textarea>
+        >
+        <mat-error *ngIf="title.invalid">Enter post content</mat-error>
+    </textarea>
     </mat-form-field>
     <button mat-raised-button
      color="accent"

@@ -1,13 +1,27 @@
-<mat-accordion multi="true" *ngIf="posts.length > 0">
+<mat-accordion *ngIf="posts.length > 0">
     <mat-expansion-panel *ngFor="let post of posts">
-        <mat-expansion-panel-header >
-            {{ post.title }}
-        </mat-expansion-panel-header>
+      <mat-expansion-panel-header>
+        {{ post.title }}
+      </mat-expansion-panel-header>
+      <form *ngIf="editMode" (ngSubmit)="onSubmit(post)">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="post.title" name="title">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Content</mat-label>
+          <input matInput [(ngModel)]="post.content" name="content">
+        </mat-form-field>
+        <button color="accent" mat-raised-button type="submit">Save</button>
+      </form>
+      <div *ngIf="!editMode">
         {{ post.content }}
-        <mat-action-row>
-            <button color="primary" mat-button>Edit</button>
-            <button color="warn" mat-button>Delete</button>
-        </mat-action-row>
+      </div>
+      <mat-action-row>
+        <button (click)="onEditPost(post)" color="primary" mat-raised-button>Edit</button>
+        <button (click)="onRemovePost(post)" color="warn" mat-raised-button>Delete</button>
+      </mat-action-row>
     </mat-expansion-panel>
-</mat-accordion>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0">No posts added yet</p>
+  </mat-accordion>
+  <p class="info-text mat-body-1" *ngIf="posts.length <= 0">No posts added yet</p>
+  

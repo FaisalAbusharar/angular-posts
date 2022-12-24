@@ -34,4 +34,18 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.postsSub.unsubscribe();
     }
     
+    onRemovePost(post: any) {
+        this.postsService.removePost(post)
+    }
+
+    editMode = false;
+
+    onEditPost(post: any) {
+        this.editMode = true;
+      }
+    
+      onSubmit(post: any) {
+        this.editMode = false;
+      }
+
 }
